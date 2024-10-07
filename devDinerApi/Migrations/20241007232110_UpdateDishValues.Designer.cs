@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using devDinerApi.Models;
 
@@ -10,9 +11,11 @@ using devDinerApi.Models;
 namespace devDinerApi.Migrations
 {
     [DbContext(typeof(DinerContext))]
-    partial class DinerContextModelSnapshot : ModelSnapshot
+    [Migration("20241007232110_UpdateDishValues")]
+    partial class UpdateDishValues
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

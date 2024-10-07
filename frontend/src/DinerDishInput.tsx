@@ -14,7 +14,7 @@ function DinerDishInput() {
                     <option value="3">Friday</option>
                 </Form.Select>
                 <Form.Control placeholder='What would you like your lunch to be?' />
-                <Button>Submit</Button>
+                <Button style={{backgroundColor: 'blue'}}>Submit</Button>
             </InputGroup>
         </div>
     )
