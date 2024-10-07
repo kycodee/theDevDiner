@@ -4,3 +4,4 @@ package-lock.json
 devDinerApi/bin/Debug/net8.0
 devDinerApi/obj
 devDinerApi/appsettings.Development.json
+frontend/.gitignore
