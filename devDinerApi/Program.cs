@@ -56,8 +56,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Register services with the DI container
 builder.Services.AddControllers();
-builder.Services.AddDbContext<DinerContext>(opt =>
-    opt.UseInMemoryDatabase("DinerMenu"));
+// builder.Services.AddDbContext<DinerContext>(opt =>
+//     opt.UseInMemoryDatabase("DinerMenu"));
+builder.Services.AddDbContext<DinerContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
