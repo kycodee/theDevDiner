@@ -32,5 +32,39 @@ namespace TodoApi.Controllers
             //    return CreatedAtAction("GetTodoItem", new { id = todoItem.Id }, todoItem);
             return CreatedAtAction(nameof(GetDishes), new { id = dish.Id }, dish);
         }
+
+        [HttpPut("updateDish/{id}")]
+        public async Task<IActionResult> PutDinerDish(long id, DinerDish dish)
+        {
+        if (id != dish.Id)
+        {
+            return BadRequest();
+        }
+
+        _context.Entry(dish).State = EntityState.Modified;
+
+        try
+        {
+            await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!DinerDishExists(id))
+            {
+                return NotFound();
+            }
+            else
+            {
+                throw;
+            }
+        }
+
+            return NoContent();
+        }
+
+        private bool DinerDishExists(long id)
+        {
+            return _context.DinerDishes.Any(e => e.Id == id);
+        }
     }
 }
