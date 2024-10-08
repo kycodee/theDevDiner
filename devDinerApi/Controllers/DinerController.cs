@@ -66,5 +66,22 @@ namespace TodoApi.Controllers
         {
             return _context.DinerDishes.Any(e => e.Id == id);
         }
+
+
+    [HttpDelete("deleteDish{id}")]
+    public async Task<IActionResult> DeleteDinerDish(long id)
+    {
+        var dish = await _context.DinerDishes.FindAsync(id);
+        if (dish == null)
+        {
+            return NotFound();
+        }
+
+        _context.DinerDishes.Remove(dish);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
     }
+    }
+
 }
