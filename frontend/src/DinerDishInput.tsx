@@ -12,8 +12,8 @@ function DinerDishInput(props: any) {
     // Function to handle form submission
     function postDishOnSubmit() {
         axios.post('http://localhost:5044/api/Diner/postDinerDish', {
-                dishName,
-                dayOfWeek
+            dishName,
+            dayOfWeek
         })
             .then(() => {
                 props.getDishes() // GET updated list of dishes
@@ -22,7 +22,7 @@ function DinerDishInput(props: any) {
             })
             .catch((err: string) => {
                 console.error(err);
-              });
+            });
     }
 
 
