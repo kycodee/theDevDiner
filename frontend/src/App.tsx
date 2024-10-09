@@ -19,14 +19,6 @@ function App() {
 }
 
   useEffect(() => {
-    // axios.get('http://localhost:5044/api/Diner')
-    //     .then((results: any) => {
-    //       // console.log(results.data)
-    //         setAllDishes(results.data)
-    //     })
-    //     .catch((err: string) => {
-    //         console.error(err);
-    //     });
     getAllDishes()
   }, [])
 

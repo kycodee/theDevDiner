@@ -15,21 +15,20 @@ namespace TodoApi.Controllers
             _context = context;
         }
 
-        // GET: api/todo
+        // GET: api/Diner
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DinerDish>>> GetDishes()
         {
             return await _context.DinerDishes.ToListAsync();
         }
 
-        //POST: api/postDinerDish
+        //POST: api/Diner/postDinerDish
         [HttpPost("postDinerDish")]
         public async Task<ActionResult<DinerDish>> PostDiner(DinerDish dish)
         {
             _context.DinerDishes.Add(dish);
             await _context.SaveChangesAsync();
 
-            //    return CreatedAtAction("GetTodoItem", new { id = todoItem.Id }, todoItem);
             return CreatedAtAction(nameof(GetDishes), new { id = dish.Id }, dish);
         }
 

@@ -48,7 +48,6 @@ function DinerDishCard(props: any) {
                                     <Card.Text>
                                         {`${dish.dishName} is what's for lunch on ${dish.dayOfWeek}`}
                                     </Card.Text>
-                                    {/* <Button style={{ backgroundColor: 'orange' }} >Update Lunch Dish</Button> */}
                                     <Button style={{ backgroundColor: 'orange' }} onClick={handleShow}>
                                         Update Lunch Dish
                                     </Button>
@@ -86,17 +85,6 @@ function DinerDishCard(props: any) {
                     ))}
                 </Row>
             </Container>
-            {/* <Card style={{ width: '18rem', height: '250px', margin: '15px'}}>
-      <Card.Body>
-        <Card.Title>Card Title</Card.Title>
-        <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
-        <Card.Link href="#">Card Link</Card.Link>
-        <Card.Link href="#">Another Link</Card.Link>
-      </Card.Body>
-    </Card> */}
         </div>
     )
 }
