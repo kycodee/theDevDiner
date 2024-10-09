@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Button, Form, InputGroup } from 'react-bootstrap';
 
-function DinerDishInput() {
+function DinerDishInput(props: any) {
 
 
     const [dayOfWeek, setDayOfWeek] = useState('')
     const [dishName, setDishName] = useState('')
-    const [allDishes, setAllDishes] = useState([])
 
     function postDishOnSubmit() {
         axios.post('http://localhost:5044/api/Diner/postDinerDish', {
@@ -15,7 +14,9 @@ function DinerDishInput() {
                 dayOfWeek
         })
             .then(() => {
-                console.log('post successful')
+                props.getDishes()
+                setDayOfWeek('')
+                setDishName('')
             })
             .catch((err: string) => {
                 console.error(err);
@@ -34,7 +35,7 @@ function DinerDishInput() {
     return (
         <div className='d-flex justify-content-center'>
             <InputGroup className="w-50">
-                <Form.Select aria-label="Default select example" onChange={(e) => updateDayOfTheWeekOnChange(e.target)}>
+                <Form.Select aria-label="Default select example" value={dayOfWeek} onChange={(e) => updateDayOfTheWeekOnChange(e.target)}>
                     <option>Day of the Week</option>
                     <option value="Monday">Monday</option>
                     <option value="Tuesday">Tuesday</option>
@@ -42,7 +43,7 @@ function DinerDishInput() {
                     <option value="Thursday">Thursday</option>
                     <option value="Friday">Friday</option>
                 </Form.Select>
-                <Form.Control placeholder='What would you like your lunch to be?' onChange={(e) => updateDishNameOnChange(e.target.value)} />
+                <Form.Control placeholder='What would you like your lunch to be?' value={dishName} onChange={(e) => updateDishNameOnChange(e.target.value)} />
                 <Button style={{ backgroundColor: 'blue' }} onClick={postDishOnSubmit}>Submit</Button>
             </InputGroup>
         </div>

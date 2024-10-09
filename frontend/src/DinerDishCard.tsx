@@ -12,6 +12,9 @@ function DinerDishCard(props: any) {
 
     function deleteDishOnClick(id: any) {
         axios.delete(`http://localhost:5044/api/Diner/deleteDish${id}`)
+            .then(() => {
+                props.getDishes()
+            })
             .catch((err: string) => {
                 console.error(err);
             });
@@ -23,9 +26,12 @@ function DinerDishCard(props: any) {
             dishName: updatedDish,
             dayOfWeek
         })
-        .catch((err: string) => {
-            console.error(err);
-        });
+        .then(() => {
+            props.getDishes()
+        })
+            .catch((err: string) => {
+                console.error(err);
+            });
         handleClose()
     }
 
@@ -33,9 +39,9 @@ function DinerDishCard(props: any) {
         <div style={{ width: '70vw', height: '600px', marginTop: '50px' }} className='mx-auto'>
             <Container fluid>
                 <Row>
-                    {props.dishes.map((dish: any, index: any) => (
+                    {props.dishes.map((dish: any) => (
 
-                        <Col key={index}>
+                        <Col key={dish.id}>
                             <Card style={{ width: '18rem', height: '250px', margin: '15px' }}>
                                 <Card.Body>
                                     <Card.Title>{dish.dishName}</Card.Title>
