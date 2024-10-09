@@ -4,15 +4,21 @@ import { Card, Container, Row, Col, Button, Form, Modal } from "react-bootstrap"
 
 function DinerDishCard(props: any) {
 
+    // Controls modal visibility
     const [show, setShow] = useState(false);
+    // Holds the value for the dish being updated
     const [updatedDish, setUpdatedDish] = useState('')
 
+    // Function to close the modal
     const handleClose = () => setShow(false);
+    // Function to show the modal
     const handleShow = () => setShow(true);
 
+    // Function to delete a dish
     function deleteDishOnClick(id: any) {
         axios.delete(`http://localhost:5044/api/Diner/deleteDish${id}`)
             .then(() => {
+                // GET updated list of dishes
                 props.getDishes()
             })
             .catch((err: string) => {
@@ -20,18 +26,22 @@ function DinerDishCard(props: any) {
             });
     }
 
+    // Function to update a dish
     function dishUpdateOnClick(id: any, dayOfWeek: string) {
         axios.put(`http://localhost:5044/api/Diner/updateDish/${id}`, {
             id,
             dishName: updatedDish,
             dayOfWeek
         })
-        .then(() => {
-            props.getDishes()
-        })
+            .then(() => {
+                // GET updated list of dishes
+                props.getDishes()
+            })
             .catch((err: string) => {
                 console.error(err);
             });
+
+        // Close the modal
         handleClose()
     }
 

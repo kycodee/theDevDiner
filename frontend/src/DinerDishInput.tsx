@@ -4,19 +4,21 @@ import { Button, Form, InputGroup } from 'react-bootstrap';
 
 function DinerDishInput(props: any) {
 
-
+    // Holds the selected day of the week
     const [dayOfWeek, setDayOfWeek] = useState('')
+    // Holds the name of the dish
     const [dishName, setDishName] = useState('')
 
+    // Function to handle form submission
     function postDishOnSubmit() {
         axios.post('http://localhost:5044/api/Diner/postDinerDish', {
                 dishName,
                 dayOfWeek
         })
             .then(() => {
-                props.getDishes()
-                setDayOfWeek('')
-                setDishName('')
+                props.getDishes() // GET updated list of dishes
+                setDayOfWeek('') // Reset day of the week
+                setDishName('') // Reset dish name
             })
             .catch((err: string) => {
                 console.error(err);
@@ -24,12 +26,16 @@ function DinerDishInput(props: any) {
     }
 
 
-    function updateDishNameOnChange(e: any) {
-        setDishName(e)
+    // Function to update the dish name from input
+    function updateDishNameOnChange(val: any) {
+        // Update dishName state with input value
+        setDishName(val)
     }
 
-    function updateDayOfTheWeekOnChange(e: any) {
-        setDayOfWeek(e.value)
+    // Function to update the selected day of the week
+    function updateDayOfTheWeekOnChange(selected: any) {
+        // Update dayOfWeek state with selected value
+        setDayOfWeek(selected.value)
     }
 
     return (

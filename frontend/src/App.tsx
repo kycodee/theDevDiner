@@ -6,8 +6,10 @@ import DinerDishCard from './DinerDishCard';
 
 function App() {
 
+  //Holds dishes from database
   const [allDishes, setAllDishes] = useState([])
 
+  //Function to get all dishes
   function getAllDishes() {
     axios.get('http://localhost:5044/api/Diner')
     .then((results: any) => {
@@ -18,7 +20,9 @@ function App() {
     });
 }
 
+  // On initial page render, invoke function to retrieve dishes from the database
   useEffect(() => {
+    // GET all dishes to display in the UI
     getAllDishes()
   }, [])
 
