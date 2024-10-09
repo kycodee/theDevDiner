@@ -22,7 +22,7 @@ namespace TodoApi.Controllers
             return await _context.DinerDishes.ToListAsync();
         }
 
-        //POST: api/Diner/postDinerDish
+        // POST: api/Diner/postDinerDish
         [HttpPost("postDinerDish")]
         public async Task<ActionResult<DinerDish>> PostDiner(DinerDish dish)
         {
@@ -32,6 +32,7 @@ namespace TodoApi.Controllers
             return CreatedAtAction(nameof(GetDishes), new { id = dish.Id }, dish);
         }
 
+        // PUT: api/Diner/updateDish/{id}
         [HttpPut("updateDish/{id}")]
         public async Task<IActionResult> PutDinerDish(long id, DinerDish dish)
         {
@@ -66,21 +67,21 @@ namespace TodoApi.Controllers
             return _context.DinerDishes.Any(e => e.Id == id);
         }
 
-
-    [HttpDelete("deleteDish{id}")]
-    public async Task<IActionResult> DeleteDinerDish(long id)
-    {
-        var dish = await _context.DinerDishes.FindAsync(id);
-        if (dish == null)
+        // DELETE: api/Diner/deleteDish{id}
+        [HttpDelete("deleteDish{id}")]
+        public async Task<IActionResult> DeleteDinerDish(long id)
         {
-            return NotFound();
+            var dish = await _context.DinerDishes.FindAsync(id);
+            if (dish == null)
+            {
+                return NotFound();
+            }
+
+            _context.DinerDishes.Remove(dish);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
-
-        _context.DinerDishes.Remove(dish);
-        await _context.SaveChangesAsync();
-
-        return NoContent();
-    }
-    }
+        }
 
 }
