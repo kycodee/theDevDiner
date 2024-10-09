@@ -1,26 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { Card, Container, Row, Col, Button } from "react-bootstrap";
 
-function DinerDishCard() {
+function DinerDishCard(props: any) {
+
+    
+    function deleteDishOnClick(id: any) {
+        axios.delete(`http://localhost:5044/api/Diner/deleteDish${id}`)
+        .catch((err: string) => {
+            console.error(err);
+        });
+    }
+
     return (
         <div style={{ width: '70vw', height: '600px', marginTop: '50px' }} className='mx-auto'>
             <Container fluid>
                 <Row>
-                    <Col >
+                    {props.dishes.map((dish: any, index: any) => (
+
+                    <Col key={index}>
                         <Card style={{ width: '18rem', height: '250px', margin: '15px' }}>
                             <Card.Body>
-                                <Card.Title>Monday</Card.Title>
+                                <Card.Title>{dish.dishName}</Card.Title>
                                 <Card.Text>
-                                   Crawfish is what's for lunch on Monday
+                                   {`${dish.dishName} is what's for lunch on ${dish.dayOfWeek}`}
                                 </Card.Text>
                                 <Button style={{backgroundColor: 'orange'}} href="#">Update Lunch Dish</Button>
                                 <div>
-                                <Button style={{margin: '5px', backgroundColor: 'red', border: 'none'}} href="#">Delete Dish</Button>
+                                <Button style={{margin: '5px', backgroundColor: 'red', border: 'none'}} onClick={() => deleteDishOnClick(dish.id)} >Delete Dish</Button>
                                 </div>
                             </Card.Body>
                         </Card>
                     </Col>
+                    ))}
                 </Row>
             </Container>
             {/* <Card style={{ width: '18rem', height: '250px', margin: '15px'}}>

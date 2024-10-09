@@ -7,6 +7,7 @@ function DinerDishInput() {
 
     const [dayOfWeek, setDayOfWeek] = useState('')
     const [dishName, setDishName] = useState('')
+    const [allDishes, setAllDishes] = useState([])
 
     function postDishOnSubmit() {
         axios.post('http://localhost:5044/api/Diner/postDinerDish', {
