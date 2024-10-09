@@ -2,7 +2,19 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Card, Container, Row, Col, Button, Form, Modal } from "react-bootstrap";
 
-function DinerDishCard(props: any) {
+// Defines the shape of the dish props
+interface DinerDish {
+    id: number;
+    dishName: string;
+    dayOfWeek: string;
+}
+
+interface DinerDishCardProps {
+    dishes: DinerDish[];
+    getDishes: () => void; // Function to GET dishes
+}
+
+function DinerDishCard(props: DinerDishCardProps) {
 
     // Controls modal visibility
     const [show, setShow] = useState(false);
@@ -15,7 +27,7 @@ function DinerDishCard(props: any) {
     const handleShow = () => setShow(true);
 
     // Function to delete a dish
-    function deleteDishOnClick(id: any) {
+    function deleteDishOnClick(id: number) {
         axios.delete(`http://localhost:5044/api/Diner/deleteDish${id}`)
             .then(() => {
                 // GET updated list of dishes
@@ -27,7 +39,7 @@ function DinerDishCard(props: any) {
     }
 
     // Function to update a dish
-    function dishUpdateOnClick(id: any, dayOfWeek: string) {
+    function dishUpdateOnClick(id: number, dayOfWeek: string) {
         axios.put(`http://localhost:5044/api/Diner/updateDish/${id}`, {
             id,
             dishName: updatedDish,

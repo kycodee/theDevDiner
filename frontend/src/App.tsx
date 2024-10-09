@@ -6,12 +6,19 @@ import DinerDishCard from './DinerDishCard';
 
 function App() {
 
+  // Define an interface for a Dish
+  interface Dish {
+    id: number;
+    dishName: string;
+    dayOfWeek: string;
+}
+
   //Holds dishes from database
   const [allDishes, setAllDishes] = useState([])
 
   //Function to get all dishes
   function getAllDishes() {
-    axios.get('http://localhost:5044/api/Diner')
+    axios.get<Dish[]>('http://localhost:5044/api/Diner')
       .then((results: any) => {
         setAllDishes(results.data)
       })

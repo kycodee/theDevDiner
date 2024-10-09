@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Button, Form, InputGroup } from 'react-bootstrap';
 
-function DinerDishInput(props: any) {
+interface DinerDishInputProps {
+    getDishes: () => void; // This function updates the dish array
+}
+
+function DinerDishInput(props: DinerDishInputProps) {
 
     // Holds the selected day of the week
     const [dayOfWeek, setDayOfWeek] = useState('')
@@ -27,21 +31,21 @@ function DinerDishInput(props: any) {
 
 
     // Function to update the dish name from input
-    function updateDishNameOnChange(val: any) {
+    function updateDishNameOnChange(val: string) {
         // Update dishName state with input value
         setDishName(val)
     }
 
     // Function to update the selected day of the week
-    function updateDayOfTheWeekOnChange(selected: any) {
+    function updateDayOfTheWeekOnChange(selected: React.ChangeEvent<HTMLSelectElement>) {
         // Update dayOfWeek state with selected value
-        setDayOfWeek(selected.value)
+        setDayOfWeek(selected.target.value)
     }
 
     return (
         <div className='d-flex justify-content-center'>
             <InputGroup className="w-50">
-                <Form.Select aria-label="Default select example" value={dayOfWeek} onChange={(e) => updateDayOfTheWeekOnChange(e.target)}>
+                <Form.Select aria-label="Default select example" value={dayOfWeek} onChange={(e) => updateDayOfTheWeekOnChange(e)}>
                     <option>Day of the Week</option>
                     <option value="Monday">Monday</option>
                     <option value="Tuesday">Tuesday</option>
